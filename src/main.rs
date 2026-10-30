@@ -5,11 +5,13 @@ mod game;
 mod menu;
 mod parser;
 mod render;
+mod keybindings;
 
 use crate::audio::audio_handler::Audio;
+use crate::keybindings::{Keybindings, parse_key};
 use crate::menu::menu_handler::{AppState, Menu};
 use crate::render::{RendererData, render_init};
-use minifb::{Key, KeyRepeat, Window, WindowOptions};
+use minifb::{KeyRepeat, Window, WindowOptions};
 use std::f64::consts::PI;
 use std::time::Instant;
 
@@ -58,6 +60,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let mut game = game::Game::new_game(&renderer_data).unwrap();
     let mut audio = Audio::init();
     let mut menu = Menu::new();
+    let mut keybindings = Keybindings::load()
 
     let mut app_state = AppState::StartScreen;
 
